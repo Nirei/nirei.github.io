@@ -365,7 +365,7 @@ const MADOX = "#FF197F";
 
 function renderCurve(mst) {
   const ctx = document.getElementById("canvas").getContext("2d");
-  ctx.lineWidth = 70;
+  ctx.lineWidth = 60;
   ctx.strokeStyle = MADOX;
   ctx.lineJoin = "round";
 
