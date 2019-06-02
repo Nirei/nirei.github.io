@@ -348,8 +348,16 @@ function drawDebuggingGrid(ctx) {
   }
 }
 
+const MADOX = "#FF197F";
+const params = new URLSearchParams(new URL(window.location).search);
+
+const SIZE = parseInt(params.get("size")) || 15;
+const COLOR = params.get("color") || MADOX;
+const BGCOLOR = params.get("bgcolor") || "#fff";
+
 function setupCanvas() {
   const canvas = document.getElementById("canvas");
+  canvas.style.backgroundColor = BGCOLOR;
   const ctx = canvas.getContext("2d");
   const width = document.documentElement.clientWidth;
   const height = document.documentElement.clientHeight;
@@ -360,13 +368,10 @@ function setupCanvas() {
   ctx.scale(0.25, 0.25);
 }
 
-const SIZE = 15;
-const MADOX = "#FF197F";
-
 function renderCurve(mst) {
   const ctx = document.getElementById("canvas").getContext("2d");
   ctx.lineWidth = 60;
-  ctx.strokeStyle = MADOX;
+  ctx.strokeStyle = COLOR;
   ctx.lineJoin = "round";
 
   const turtle = Turtle(ctx);
