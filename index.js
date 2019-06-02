@@ -354,6 +354,7 @@ const params = new URLSearchParams(new URL(window.location).search);
 const SIZE = parseInt(params.get("size")) || 15;
 const COLOR = params.get("color") || MADOX;
 const BGCOLOR = params.get("bgcolor") || "#fff";
+let scale = 0.25;
 
 function setupCanvas() {
   const canvas = document.getElementById("canvas");
@@ -365,7 +366,7 @@ function setupCanvas() {
   ctx.canvas.height = height;
   ctx.resetTransform();
   ctx.translate(width / 2, height / 2);
-  ctx.scale(0.25, 0.25);
+  ctx.scale(scale, scale);
 }
 
 function renderCurve(mst) {
@@ -433,14 +434,33 @@ function generateCurve(h, v) {
 
 const CURVE = generateCurve(SIZE, SIZE);
 
-window.onresize = function () {
+function draw() {
   setupCanvas();
   renderCurve(CURVE);
+}
+
+function bindCanvasEvents() {
+  const canvas = document.getElementById("canvas");
+  canvas.onwheel = function (event) {
+    event.preventDefault;
+    event.target.getContext("2d");
+
+    if (event.deltaY < 0) {
+      scale *= event.deltaY * -2;
+    } else {
+      scale /= event.deltaY * 2;
+    }
+    draw();
+  };
+}
+
+window.onresize = function () {
+  draw();
 };
 
 window.onload = function () {
-  setupCanvas();
-  renderCurve(CURVE);
+  bindCanvasEvents();
+  draw();
 };
 
 },{"@tyriar/fibonacci-heap":2}],2:[function(require,module,exports){
