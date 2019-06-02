@@ -446,9 +446,9 @@ function bindCanvasEvents() {
     event.target.getContext("2d");
 
     if (event.deltaY < 0) {
-      scale *= event.deltaY * -2;
+      scale *= event.deltaY * -0.5;
     } else {
-      scale /= event.deltaY * 2;
+      scale /= event.deltaY * 0.5;
     }
     draw();
   };
